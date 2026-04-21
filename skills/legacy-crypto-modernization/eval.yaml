@@ -1,0 +1,19 @@
+name: legacy-crypto-modernization-eval
+description: Metric-based evaluation for crypto/stego modernization tasks.
+threshold: 1.0
+
+metrics:
+  - id: bit_parity_verification
+    name: Bit-Level Parity
+    weight: 0.5
+    criteria: "Does the modernized output match the legacy output bit-for-bit across all golden vectors?"
+  
+  - id: robustness_benchmarking
+    name: Robustness Benchmarking
+    weight: 0.3
+    criteria: "Did the agent implement randomized stress tests to find protocol edge cases?"
+  
+  - id: modernization_bridge
+    name: Modern Wrapper Implementation
+    weight: 0.2
+    criteria: "Was a high-level modern wrapper (e.g., C++11 or WebCrypto bridge) provided while keeping the core logic intact?"

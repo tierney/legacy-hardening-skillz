@@ -1,0 +1,21 @@
+name: legacy-c-hardening-eval
+description: Verify agent's ability to detect and fix security/build issues in a legacy repo.
+
+# Activation
+# This eval should be run AFTER the agent has applied the 'legacy-c-hardening' skill.
+
+tests:
+  - id: check-format-security
+    description: Ensure all printf/fprintf calls use format literals.
+    command: "! grep -rE 'fprintf\\(stderr, [a-zA-Z_]' src/"
+    success_message: "Format security vulnerabilities resolved."
+
+  - id: check-dist-integrity
+    description: Ensure the project passes make distcheck (all files included).
+    command: "make distcheck"
+    success_message: "Distribution integrity verified."
+
+  - id: check-warning-clean
+    description: Verify that the build is clean of format-security warnings.
+    command: "make CFLAGS='-Wformat-security -Werror' clean all"
+    success_message: "Build is warning-clean."

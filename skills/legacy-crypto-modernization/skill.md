@@ -10,7 +10,7 @@ version: 1.1.0
 This skill enables an agent to modernize "black box" legacy crypto and steganography protocols, ensuring bit-perfect parity and platform portability (TypeScript/Rust/Wasm).
 
 ## 1. Discovery Phase
-Activate this skill when encountering:
+Activate this skill when encountering legacy crypto/steganography code (e.g. Reed-Solomon, Bacchant, Aesthete). Performance is measured according to [Evaluation Metrics](eval.yaml).
 - Legacy crypto libraries (SJCL, CryptoJS, custom RC4/XOR).
 - Steganography code embedded in UI frameworks (Closure, jQuery).
 - Logic that must survive lossy transformations (JPEG, network jitter).

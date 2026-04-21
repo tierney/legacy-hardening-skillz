@@ -10,7 +10,7 @@ version: 1.1.0
 This skill enables an agent to perform "repository archaeology" and "hardening" on 1990s/2000s-era C codebases using Autotools.
 
 ## 1. Discovery Phase
-When an agent encounters a repository with a `configure.ac` and multiple `.c`/`.cpp` files with legacy headers, it should activate this skill to ensure behavioral preservation.
+When an agent encounters a repository with a `configure.ac` and multiple `.c`/`.cpp` files with legacy headers, it should activate this skill to ensure behavioral preservation. Performance is measured according to [Evaluation Metrics](eval.yaml).
 
 ## 2. Activation Workflow
 
