@@ -12,7 +12,7 @@ Each skill contains YAML metadata. Agents scan these headers to identify the cor
 ### Level 2: Activation (`skill.md` Instructions)
 The main body of the `skill.md` file provides high-level logic, workflows, and success criteria for the agent to follow once a skill is activated.
 
-### Level 3: Execution (`docs/` & `tools/`)
+### Level 3: Execution (`references/` & `scripts/`)
 Deep reference documentation and automated scripts/tools that the agent invokes for deep audits or behavioral verification.
 
 ## Skills Included

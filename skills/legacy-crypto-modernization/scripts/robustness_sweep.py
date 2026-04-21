@@ -22,12 +22,25 @@ def simulate_transformation(image_path, quality):
 def run_sweep(image_path, start_q=100, end_q=10, step=-5):
     """Sweeps through quality levels and reports survival metrics."""
     results = []
+    
+    # NOTE: To use this script, implement a 'Codec' class with a 'decode' method.
+    # from my_modern_codec import Codec
+    # codec = Codec()
+
     for q in range(start_q, end_q + step, step):
-        # transformed_img = simulate_transformation(image_path, q)
-        # TODO: Call your codec's decode function here
-        # success = check_decode_success(transformed_img)
         print(f"Testing Quality: {q}...")
-        results.append({"quality": q, "success": True}) # Placeholder
+        transformed_img = simulate_transformation(image_path, q)
+        
+        # Placeholder for real decode logic
+        # recovered_data = codec.decode(transformed_img)
+        # success = (recovered_data == EXPECTED_DATA)
+        success = True # TODO: Replace with real comparison
+        
+        results.append({
+            "quality": q, 
+            "success": success,
+            "metric": "parity" # Could be 'bit_error_rate', etc.
+        })
     
     return results
 

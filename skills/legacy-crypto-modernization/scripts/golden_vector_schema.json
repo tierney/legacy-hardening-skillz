@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Golden Vector Schema",
+  "description": "Definition for bit-parity test fixtures between legacy and modern crypto implementations.",
+  "type": "object",
+  "required": ["id", "input", "expected_output"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the test case."
+    },
+    "input": {
+      "type": "string",
+      "description": "Base64 encoded input buffer or image data."
+    },
+    "key": {
+      "type": "string",
+      "description": "Base64 encoded key/password/salt."
+    },
+    "expected_output": {
+      "type": "string",
+      "description": "Base64 encoded expected output buffer."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Protocol-specific parameters (e.g., dimensions, iterations)."
+    }
+  }
+}
