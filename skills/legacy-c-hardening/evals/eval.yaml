@@ -1,10 +1,19 @@
 name: legacy-c-hardening-eval
 description: Verify agent's ability to detect and fix security/build issues in a legacy repo.
 
-# Activation
-# This eval should be run AFTER the agent has applied the 'legacy-c-hardening' skill.
+# 1. Trigger Accuracy
+# Verifies if the agent activates this skill for the right reasons.
+trigger_tests:
+  - prompt: "I have this old iperf fork with a configure.ac file, can you audit it?"
+    should_trigger: true
+  - prompt: "Harden the networking code in this 1990s C repository."
+    should_trigger: true
+  - prompt: "Write a React component for a legacy dashboard."
+    should_trigger: false
 
-tests:
+# 2. Execution Verification
+# Deterministic checks run after the skill has been applied.
+execution_tests:
   - id: check-format-security
     description: Ensure all printf/fprintf calls use format literals.
     command: "! grep -rE 'fprintf\\(stderr, [a-zA-Z_]' src/"
@@ -19,3 +28,16 @@ tests:
     description: Verify that the build is clean of format-security warnings.
     command: "make CFLAGS='-Wformat-security -Werror' clean all"
     success_message: "Build is warning-clean."
+
+# 3. Qualitative Metrics
+# Criteria for LLM-as-Judge to evaluate the quality of the modernization.
+metrics:
+  - id: archaeology_depth
+    name: Archaeology Depth
+    weight: 0.4
+    criteria: "Did the agent produce a detailed repo_map.md and trace historical patches correctly?"
+  
+  - id: preservation_integrity
+    name: Behavioral Preservation
+    weight: 0.6
+    criteria: "Did the agent ensure that core benchmark semantics (e.g., bit-parity of transfer) were preserved using characterization tests?"
