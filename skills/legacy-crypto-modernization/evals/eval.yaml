@@ -1,23 +1,7 @@
 name: legacy-crypto-modernization-eval
 description: Metric-based evaluation for crypto/stego modernization tasks.
+threshold: 1.0
 
-# 1. Trigger Accuracy
-trigger_tests:
-  - prompt: "Port this old SJCL crypto logic to a modern Rust/Wasm core."
-    should_trigger: true
-  - prompt: "We need to modernize this legacy Reed-Solomon library for the browser."
-    should_trigger: true
-  - prompt: "Optimize the CSS for this crypto dashboard."
-    should_trigger: false
-
-# 2. Execution Verification
-execution_tests:
-  - id: parity-test-run
-    description: Verify that the parity verifier script runs and passes.
-    command: "npm run test:parity" # Example command
-    success_message: "Bit-parity verification passed."
-
-# 3. Qualitative Metrics
 metrics:
   - id: bit_parity_verification
     name: Bit-Level Parity
@@ -27,9 +11,9 @@ metrics:
   - id: robustness_benchmarking
     name: Robustness Benchmarking
     weight: 0.3
-    criteria: "Did the agent implement randomized stress tests to find protocol edge cases (e.g. JPEG recompression)?"
+    criteria: "Did the agent implement randomized stress tests to find protocol edge cases?"
   
   - id: modernization_bridge
     name: Modern Wrapper Implementation
     weight: 0.2
-    criteria: "Was a high-level modern wrapper (e.g., WebCrypto bridge) provided while keeping the core logic intact?"
+    criteria: "Was a high-level modern wrapper (e.g., C++11 or WebCrypto bridge) provided while keeping the core logic intact?"

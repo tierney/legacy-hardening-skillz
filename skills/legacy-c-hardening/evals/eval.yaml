@@ -1,43 +1,38 @@
 name: legacy-c-hardening-eval
-description: Verify agent's ability to detect and fix security/build issues in a legacy repo.
+description: Metric-based evaluation for historical C/C++ hardening tasks.
+threshold: 0.85
 
-# 1. Trigger Accuracy
-# Verifies if the agent activates this skill for the right reasons.
-trigger_tests:
-  - prompt: "I have this old iperf fork with a configure.ac file, can you audit it?"
-    should_trigger: true
-  - prompt: "Harden the networking code in this 1990s C repository."
-    should_trigger: true
-  - prompt: "Write a React component for a legacy dashboard."
-    should_trigger: false
+metrics:
+  - id: provenance_verification
+    name: Provenance Identification
+    weight: 0.3
+    criteria: "Did the agent correctly map the source to a specific historical upstream?"
+  
+  - id: characterization_pinning
+    name: Behavioral Pinning
+    weight: 0.3
+    criteria: "Were deterministic Golden Vectors established before any logic changes were made?"
+  
+  - id: api_preservation
+    name: Public API Integrity
+    weight: 0.2
+    criteria: "Did the public API signatures remain stable to prevent downstream breakage?"
+  
+  - id: build_hardening
+    name: Toolchain Hardening
+    weight: 0.2
+    criteria: "Did the agent enable strict warnings and ensure `make distcheck` compliance?"
 
-# 2. Execution Verification
-# Deterministic checks run after the skill has been applied.
-execution_tests:
+# Level 3: Execution Logic
+automated_checks:
   - id: check-format-security
     description: Ensure all printf/fprintf calls use format literals.
     command: "! grep -rE 'fprintf\\(stderr, [a-zA-Z_]' src/"
-    success_message: "Format security vulnerabilities resolved."
-
-  - id: check-dist-integrity
-    description: Ensure the project passes make distcheck (all files included).
-    command: "make distcheck"
-    success_message: "Distribution integrity verified."
-
-  - id: check-warning-clean
-    description: Verify that the build is clean of format-security warnings.
-    command: "make CFLAGS='-Wformat-security -Werror' clean all"
-    success_message: "Build is warning-clean."
-
-# 3. Qualitative Metrics
-# Criteria for LLM-as-Judge to evaluate the quality of the modernization.
-metrics:
-  - id: archaeology_depth
-    name: Archaeology Depth
-    weight: 0.4
-    criteria: "Did the agent produce a detailed repo_map.md and trace historical patches correctly?"
   
-  - id: preservation_integrity
-    name: Behavioral Preservation
-    weight: 0.6
-    criteria: "Did the agent ensure that core benchmark semantics (e.g., bit-parity of transfer) were preserved using characterization tests?"
+  - id: check-dist-integrity
+    description: Ensure the project passes make distcheck.
+    command: "make distcheck"
+  
+  - id: check-warning-clean
+    description: Verify build is clean under -Wformat-security.
+    command: "make CFLAGS='-Wformat-security -Werror' clean all"
