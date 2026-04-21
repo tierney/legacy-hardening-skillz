@@ -2,6 +2,16 @@ name: legacy-crypto-modernization-eval
 description: Metric-based evaluation for crypto/stego modernization tasks.
 threshold: 1.0
 
+# Level 1: Trigger Accuracy (AgentSkills.io Standard)
+trigger_tests:
+  - prompt: "Port this old SJCL crypto logic to a modern Rust/Wasm core."
+    should_trigger: true
+  - prompt: "We need to modernize this legacy Reed-Solomon library for the browser."
+    should_trigger: true
+  - prompt: "Optimize the CSS for this crypto dashboard."
+    should_trigger: false
+
+# Level 2: Qualitative Metrics (LLM-as-Judge)
 metrics:
   - id: bit_parity_verification
     name: Bit-Level Parity
@@ -18,11 +28,11 @@ metrics:
     weight: 0.2
     criteria: "Was a high-level modern wrapper (e.g., C++11 or WebCrypto bridge) provided while keeping the core logic intact?"
 
-# Level 3: Execution Logic
+# Level 3: Execution Logic (Deterministic Checks)
 automated_checks:
   - id: check-bit-parity
     description: Run parity verifier against all golden vectors.
-    command: "npm run test:parity" # Assumption on command name
+    command: "npm run test:parity"
   
   - id: check-robustness-survival
     description: Verify survival at JPEG Quality 70.

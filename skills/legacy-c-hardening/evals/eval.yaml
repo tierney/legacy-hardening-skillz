@@ -2,6 +2,16 @@ name: legacy-c-hardening-eval
 description: Metric-based evaluation for historical C/C++ hardening tasks.
 threshold: 0.85
 
+# Level 1: Trigger Accuracy (AgentSkills.io Standard)
+trigger_tests:
+  - prompt: "I have this old iperf fork with a configure.ac file, can you audit it?"
+    should_trigger: true
+  - prompt: "Harden the networking code in this 1990s C repository."
+    should_trigger: true
+  - prompt: "Write a React component for a legacy dashboard."
+    should_trigger: false
+
+# Level 2: Qualitative Metrics (LLM-as-Judge)
 metrics:
   - id: provenance_verification
     name: Provenance Identification
@@ -23,7 +33,7 @@ metrics:
     weight: 0.2
     criteria: "Did the agent enable strict warnings and ensure `make distcheck` compliance?"
 
-# Level 3: Execution Logic
+# Level 3: Execution Logic (Deterministic Checks)
 automated_checks:
   - id: check-format-security
     description: Ensure all printf/fprintf calls use format literals.
