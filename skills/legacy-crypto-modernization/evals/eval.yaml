@@ -17,3 +17,13 @@ metrics:
     name: Modern Wrapper Implementation
     weight: 0.2
     criteria: "Was a high-level modern wrapper (e.g., C++11 or WebCrypto bridge) provided while keeping the core logic intact?"
+
+# Level 3: Execution Logic
+automated_checks:
+  - id: check-bit-parity
+    description: Run parity verifier against all golden vectors.
+    command: "npm run test:parity" # Assumption on command name
+  
+  - id: check-robustness-survival
+    description: Verify survival at JPEG Quality 70.
+    command: "python3 scripts/robustness_sweep.py evals/fixtures/encoded_sample.jpg"
