@@ -18,8 +18,7 @@ Deep reference documentation and automated scripts/tools that the agent invokes 
 ## Skills Included
 
 ### 1. [Legacy C Hardening](skills/legacy-c-hardening/skill.md)
-Hardening legacy C codebases (specifically iperf2-era) for modern build systems and security standards.
-- Archaeology (Mapping)
-- Autotools Hardening
-- Format Security Audits
-- Behavioral Comparison Matrix
+Audit, harden, and document legacy C/C++ network tools. Focuses on security hygiene and behavioral preservation.
+
+### 2. [Legacy Crypto Modernization](skills/legacy-crypto-modernization/skill.md)
+Modernize legacy crypto and steganography protocols. Focuses on bit-parity, modern WebCrypto, and robustness benchmarking.

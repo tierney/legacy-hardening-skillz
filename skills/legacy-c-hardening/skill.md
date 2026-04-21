@@ -25,14 +25,23 @@ When an agent encounters a repository with a `configure.ac` and multiple `.c`/`.
 3. **Hygiene**: Fix `bool` macro conflicts and modern C++ toolchain incompatibilities.
 
 ### Phase C: Verification
-1. **Comparison Matrix**: Build a `.tsv` of cases comparing legacy behavior against a modern upstream (e.g., `iperf3`).
-2. **Harness**: Create a script to run both binaries and verify parity.
+1. **Characterization**: Create a suite of deterministic "Golden Vectors" (hex-level input/output pairs) to pin down the existing logic.
+2. **Property Testing**: Implement randomized stress tests to explore the algorithm's state space (e.g., error injection up to correction capacity).
+3. **Comparison Matrix**: Build a `.tsv` of cases comparing legacy behavior against a modern upstream.
+
+### Phase D: Upstream Synchronization
+1. **Source Mapping**: Identify the historical upstream version/commit (e.g., Linux 2.6.14) to confirm provenance.
+2. **Safety Backports**: Review modern versions of the upstream for targeted robustness fixes (e.g., syndrome verification, NULL checks) that preserve the legacy API signature.
+3. **Legal Audit**: Align `COPYING` and SPDX-License-Identifier headers with the legally required upstream license.
 
 ## 3. References (Level 3)
 - [Archaeology Guide](docs/archaeology.md)
+- [Kernel Port Provenance](docs/kernel_port_provenance.md)
+- [Characterization Testing](docs/characterization_testing.md)
 - [Autotools Hardening](docs/autotools_hardening.md)
 - [Security Patterns](docs/security_patterns.md)
 
 ## 4. Tools (Level 3)
 - [Distribution Checker](tools/check_dist.sh)
+- [Golden Vector Generator](tools/gen_golden_vector.py)
 - [Matrix Runner](tools/matrix_harness.py)
