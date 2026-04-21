@@ -1,7 +1,7 @@
 ---
 name: legacy-crypto-modernization
 description: Modernize legacy crypto and steganography protocols into high-performance, cross-platform core libraries.
-author: Michael Tierney
+author: Matt Tierney
 version: 1.1.0
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: legacy-c-hardening
 description: Audit, harden, and document legacy C/C++ network tools using Autotools.
-author: Michael Tierney
+author: Matt Tierney
 version: 1.1.0
 ---
 
